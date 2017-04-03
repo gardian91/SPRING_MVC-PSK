@@ -68,8 +68,8 @@ public class AccountController {
 
 		model.addAttribute("message", id + " " + name);
 
-		return viewPage;
+        return viewPage;
 
-	}
+    }
 
 }
