@@ -135,8 +135,8 @@ public class ExampleController {
 	// http://localhost:8080/requestParamExample?id=testId&name=testName
 
 	
-	@RequestMapping(value = "/postWithParamExample", method = RequestMethod.POST)
-	public @ResponseBody User postWithParamExample(Model model,@RequestParam(value = "id", required = false) String id,
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
+	public @ResponseBody User addUser(@RequestParam(value = "id", required = false) String id,
 			@RequestParam(value = "name", required = false) String name) {
 
 		return userRepository.save(new User(id,name));
@@ -144,16 +144,15 @@ public class ExampleController {
 	
 
 	
-	@RequestMapping(value = "/deleteWithPathVariableExample/{id}", method = RequestMethod.DELETE)
-	public @ResponseBody User deleteWithPathVariableExample(Model model, @PathVariable("id") String id) {
-
-		//model.addAttribute("message","user with id : "+ id +" was deleted");
-
+	@RequestMapping(value = "/deleteUserWithGivenId/{id}", method = RequestMethod.DELETE)
+	public @ResponseBody User deleteUserWithGivenId(@PathVariable("id") String id) {
+		
 		return userRepository.deleteOne(id);
 	}
 	
-	@RequestMapping(value = "/getWithPathVariableExample/{id}", method = RequestMethod.GET)
-	public @ResponseBody User getWithPathVariableExample(Model model, @PathVariable("id") String id) {
+	@RequestMapping(value = "/getUserWithGivenId/{id}", method = RequestMethod.GET)
+	public @ResponseBody User getUserWithGivenId(@PathVariable("id") String id) {
+		
 		return userRepository.findOne(id);
 	}
 	

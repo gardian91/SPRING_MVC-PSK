@@ -29,8 +29,9 @@ public class ExampleClientTest {
     public void getWithPathVariableExampleShouldReturnUserWithId() {
 		
 		
-		ResponseEntity<User> response = restTemplate.exchange(url + "getWithPathVariableExample/{id}", HttpMethod.GET, null,
+		ResponseEntity<User> response = restTemplate.exchange(url + "getUserWithGivenId/{id}", HttpMethod.GET, null,
 				User.class, "2");
+		
 		
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
@@ -40,7 +41,7 @@ public class ExampleClientTest {
 	
 	@Test
     public void deleteWithPathVariableExampleShouldReturnDeletedUser() {
-		ResponseEntity<User> response = restTemplate.exchange(url + "deleteWithPathVariableExample/{id}", HttpMethod.DELETE, null, User.class, "1");
+		ResponseEntity<User> response = restTemplate.exchange(url + "deleteUserWithGivenId/{id}", HttpMethod.DELETE, null, User.class, "1");
 		
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
@@ -58,7 +59,7 @@ public class ExampleClientTest {
 
 		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 		
-		ResponseEntity<User> response = restTemplate.postForEntity(url+"postWithParamExample", request, User.class);
+		ResponseEntity<User> response = restTemplate.postForEntity(url+"addUser", request, User.class);
 		
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
