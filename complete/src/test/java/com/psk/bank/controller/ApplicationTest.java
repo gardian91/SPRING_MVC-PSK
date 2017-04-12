@@ -50,18 +50,7 @@ public class ApplicationTest {
 
     }
     
-    
-/*    @Test
-    public void postTest() throws Exception {
-    	  mockMvc.perform(post("addUser")
-                  .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                  .param("id", "1")
-                  .param("name", "newUser")
-                  .param("date", "2017-01-02T21:32:00")
-          ).
-                 
-deleteWithPathVariableExampleShouldReturnDeletedUser
-    }*/
+ 
     
     @Test
     public void deleteWithPathVariableExampleShouldReturnDeletedUser() throws Exception {
@@ -69,7 +58,7 @@ deleteWithPathVariableExampleShouldReturnDeletedUser
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", is("1")))
         .andExpect(jsonPath("$.name", is("User1")))
-        .andExpect(jsonPath("$.date", is(LocalDateTime.parse("2017-01-02T21:32:00"))));
+        .andExpect(jsonPath("$.date", is("2017-01-02T21:32:00")));
     } 
     
     

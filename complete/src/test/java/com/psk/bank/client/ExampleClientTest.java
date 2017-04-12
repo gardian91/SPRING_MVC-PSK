@@ -81,8 +81,7 @@ public class ExampleClientTest {
 		
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
-		assertThat(response.getBody().getDate()).isEqualTo("2");
-		//assertThat(response.getBody().getName()).isEqualTo(200);
+		assertThat(response.getBody().getDate()).isEqualTo(LocalDateTime.parse("2017-02-02T21:32:00"));
 	}
 
 }
