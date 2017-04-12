@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
+import java.time.LocalDateTime;
 import com.psk.bank.model.User;
 import com.psk.bank.repository.UserRepository;
 
@@ -25,7 +25,7 @@ public class ExampleController {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	private String viewPage = "infoPage";
 
 	@GetMapping
@@ -59,10 +59,10 @@ public class ExampleController {
 	}
 
 	@PostMapping
-	public String handlePostRequest(Model model,@RequestParam(value = "id", required = false) String id,
+	public String handlePostRequest(Model model, @RequestParam(value = "id", required = false) String id,
 			@RequestParam(value = "name", required = false) String name) {
 
-		model.addAttribute("message", id+" "+name);
+		model.addAttribute("message", id + " " + name);
 
 		return viewPage;
 	}
@@ -103,7 +103,6 @@ public class ExampleController {
 
 	////////// @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping)
 
-	
 	@RequestMapping(value = "pathVariableExample/{id}/{name}", method = RequestMethod.GET)
 	public String getDetails(@PathVariable("id") long id, @PathVariable("name") String name, Model model) {
 
@@ -113,14 +112,17 @@ public class ExampleController {
 
 	}
 
-	/*@RequestMapping("pathVariable/{id}/{name}")
-	public String pathVariable(@PathVariable("id") long id, @PathVariable("name") String name, Model model) {
-
-		model.addAttribute("message", id + " " + name);
-
-		return viewPage;
-
-	}*/
+	/*
+	 * @RequestMapping("pathVariable/{id}/{name}") public String
+	 * pathVariable(@PathVariable("id") long id, @PathVariable("name") String
+	 * name, Model model) {
+	 * 
+	 * model.addAttribute("message", id + " " + name);
+	 * 
+	 * return viewPage;
+	 * 
+	 * }
+	 */
 
 	@RequestMapping(value = "/requestParamExample", method = RequestMethod.GET)
 	public String getDetailsRequestParam(Model model, @RequestParam(value = "id", required = false) String id,
@@ -134,27 +136,26 @@ public class ExampleController {
 
 	// http://localhost:8080/requestParamExample?id=testId&name=testName
 
-	
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public @ResponseBody User addUser(@RequestParam(value = "id", required = false) String id,
-			@RequestParam(value = "name", required = false) String name) {
+	public @ResponseBody String addUser(@RequestParam(value = "id", required = false) String id,
+			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "date", required = false) String date) {
 
-		return userRepository.save(new User(id,name));
+		userRepository.save(new User(id, name, LocalDateTime.parse(date)));
+
+		return "User added successfully";
 	}
-	
 
-	
 	@RequestMapping(value = "/deleteUserWithGivenId/{id}", method = RequestMethod.DELETE)
 	public @ResponseBody User deleteUserWithGivenId(@PathVariable("id") String id) {
-		
+
 		return userRepository.deleteOne(id);
 	}
-	
+
 	@RequestMapping(value = "/getUserWithGivenId/{id}", method = RequestMethod.GET)
 	public @ResponseBody User getUserWithGivenId(@PathVariable("id") String id) {
-		
+
 		return userRepository.findOne(id);
 	}
-	
 
 }

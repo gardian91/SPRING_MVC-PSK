@@ -1,19 +1,20 @@
 package com.psk.bank.model;
 
-import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
 
+import java.time.LocalDateTime;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "account")
+import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class AccountEntity implements Account {    
     private String accountNumber;
     private String firstName;
 	private String lastName;
 	private Boolean active;
-	private DateTime creationTs;
+	private LocalDateTime creationTs;
     
-    public static AccountEntity newInstance(String accountNumber, String firstName, String lastName, Boolean active, DateTime creationTs) {
+    public static AccountEntity newInstance(String accountNumber, String firstName, String lastName, Boolean active, LocalDateTime creationTs) {
         AccountEntity entity = new AccountEntity();
         entity.setAccountNumber(accountNumber);
         entity.setFirstName(firstName);
@@ -43,7 +44,7 @@ public class AccountEntity implements Account {
         return active;
     }
     @Override
-    public DateTime getCreationTs() {
+    public LocalDateTime getCreationTs() {
         return this.creationTs;
     }
     
@@ -52,7 +53,7 @@ public class AccountEntity implements Account {
     }
 
     
-    public void setCreationTs(DateTime creatinonTs) {
+    public void setCreationTs(LocalDateTime creatinonTs) {
         this.creationTs = creatinonTs;
     }
 

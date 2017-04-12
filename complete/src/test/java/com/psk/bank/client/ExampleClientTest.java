@@ -1,6 +1,9 @@
 package com.psk.bank.client;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.LocalDateTime;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
@@ -45,10 +48,11 @@ public class ExampleClientTest {
 		
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
+		assertThat(response.getBody().getId()).isEqualTo("1");
 	}
 	
 	@Test
-    public void postMethodExampleShouldReturnAddedUser() {
+    public void postMethodExampleShouldReturnString() {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -56,15 +60,29 @@ public class ExampleClientTest {
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
 		map.add("id", "1");
 		map.add("name", "NewUser");
+		map.add("date", "2017-01-02T21:32:00");
 
 		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 		
-		ResponseEntity<User> response = restTemplate.postForEntity(url+"addUser", request, User.class);
+		ResponseEntity<String> response = restTemplate.postForEntity(url+"addUser", request, String.class);
 		
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
-		
+		assertThat(response.getBody()).isEqualTo("User added successfully");
 	}
 	
+	@Test
+    public void getWithPathVariableExampleShouldReturnUserDeletedWithDate() {
+		
+		
+		ResponseEntity<User> response = restTemplate.exchange(url + "getUserWithGivenId/{id}", HttpMethod.GET, null,
+				User.class, "2");
+		
+		
+		assertThat(response).isNotNull();
+		assertThat(response.getStatusCodeValue()).isEqualTo(200);
+		assertThat(response.getBody().getDate()).isEqualTo("2");
+		//assertThat(response.getBody().getName()).isEqualTo(200);
+	}
 
 }

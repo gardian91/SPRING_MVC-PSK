@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Repository;
+
 import com.psk.bank.model.Account;
 import com.psk.bank.model.Transaction;
 
-
-public class TransactionRepository implements Repository<Transaction, Long> {
+@Repository
+public class TransactionRepository implements BankRepository<Transaction, Long> {
     
     private Map<Long, Transaction> storage = new HashMap<>();
     private Long idSeq = 1L;
