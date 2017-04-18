@@ -37,18 +37,22 @@ public class ExampleClientTest {
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
 		assertThat(response.getBody().getId()).isEqualTo("2");
-		// assertThat(response.getBody().getName()).isEqualTo(200);
 	}
-
+	
 	@Test
-	public void deleteWithPathVariableExampleShouldReturnDeletedUser() {
-		ResponseEntity<User> response = restTemplate.exchange(url + "deleteUserWithGivenId/{id}", HttpMethod.DELETE,
-				null, User.class, "1");
+	public void getWithPathVariableExampleShouldReturnUserWithDate() {
 
+		ResponseEntity<User> response = restTemplate.getForEntity(url + "getUserWithGivenId/{id}", User.class,"2");
+		
+		response.getStatusCodeValue();
+		response.getBody();
+		
+		
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
-		assertThat(response.getBody().getId()).isEqualTo("1");
+		assertThat(response.getBody().getDate()).isEqualTo(LocalDateTime.parse("2017-02-02T21:32:00"));
 	}
+	
 
 	@Test
 	public void postMethodExampleShouldReturnString() {
@@ -71,16 +75,15 @@ public class ExampleClientTest {
 	}
 
 	@Test
-	public void getWithPathVariableExampleShouldReturnUserDeletedWithDate() {
+	public void deleteWithPathVariableExampleShouldReturnDeletedUser() {
+		ResponseEntity<User> response = restTemplate.exchange(url + "deleteUserWithGivenId/{id}", HttpMethod.DELETE,
+				null, User.class, "1");
 
-		ResponseEntity<User> response = restTemplate.exchange(url + "getUserWithGivenId/{id}", HttpMethod.GET, null,
-				User.class, "2");
-
-		restTemplate.d
 		
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
-		assertThat(response.getBody().getDate()).isEqualTo(LocalDateTime.parse("2017-02-02T21:32:00"));
+		assertThat(response.getBody().getId()).isEqualTo("1");
 	}
+	
 
 }
