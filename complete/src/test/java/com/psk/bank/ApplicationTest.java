@@ -1,4 +1,4 @@
-package com.psk.bank.controller;
+package com.psk.bank;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;

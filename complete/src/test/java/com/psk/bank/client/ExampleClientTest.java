@@ -76,8 +76,6 @@ public class ExampleClientTest {
 		ResponseEntity<User> response = restTemplate.exchange(url + "getUserWithGivenId/{id}", HttpMethod.GET, null,
 				User.class, "2");
 
-		restTemplate.d
-		
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
 		assertThat(response.getBody().getDate()).isEqualTo(LocalDateTime.parse("2017-02-02T21:32:00"));

@@ -28,8 +28,7 @@ public class ExampleController {
 
 	private String viewPage = "infoPage";
 
-	@GetMapping
-	@RequestMapping(value = "/modelAndView")
+	@GetMapping(value = "/modelAndView")
 	public ModelAndView modelAndView() {
 
 		ModelAndView mav = new ModelAndView();
@@ -39,8 +38,7 @@ public class ExampleController {
 		return mav;
 	}
 
-	@GetMapping
-	@RequestMapping(value = "/model")
+	@GetMapping(value = "/model")
 	public String handleGetRequest(Model model) {
 
 		model.addAttribute("message", "get request : variant 1");
