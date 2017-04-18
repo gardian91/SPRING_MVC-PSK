@@ -112,17 +112,6 @@ public class ExampleController {
 
 	}
 
-	/*
-	 * @RequestMapping("pathVariable/{id}/{name}") public String
-	 * pathVariable(@PathVariable("id") long id, @PathVariable("name") String
-	 * name, Model model) {
-	 * 
-	 * model.addAttribute("message", id + " " + name);
-	 * 
-	 * return viewPage;
-	 * 
-	 * }
-	 */
 
 	@RequestMapping(value = "/requestParamExample", method = RequestMethod.GET)
 	public String getDetailsRequestParam(Model model, @RequestParam(value = "id", required = false) String id,

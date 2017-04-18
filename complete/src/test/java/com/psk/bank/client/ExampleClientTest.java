@@ -27,33 +27,32 @@ public class ExampleClientTest {
 		restTemplate = new RestTemplate();
 		url = "http://localhost:8080/";
 	}
-	
+
 	@Test
-    public void getWithPathVariableExampleShouldReturnUserWithId() {
-		
-		
+	public void getWithPathVariableExampleShouldReturnUserWithId() {
+
 		ResponseEntity<User> response = restTemplate.exchange(url + "getUserWithGivenId/{id}", HttpMethod.GET, null,
 				User.class, "2");
-		
-		
+
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
 		assertThat(response.getBody().getId()).isEqualTo("2");
-		//assertThat(response.getBody().getName()).isEqualTo(200);
+		// assertThat(response.getBody().getName()).isEqualTo(200);
 	}
-	
+
 	@Test
-    public void deleteWithPathVariableExampleShouldReturnDeletedUser() {
-		ResponseEntity<User> response = restTemplate.exchange(url + "deleteUserWithGivenId/{id}", HttpMethod.DELETE, null, User.class, "1");
-		
+	public void deleteWithPathVariableExampleShouldReturnDeletedUser() {
+		ResponseEntity<User> response = restTemplate.exchange(url + "deleteUserWithGivenId/{id}", HttpMethod.DELETE,
+				null, User.class, "1");
+
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
 		assertThat(response.getBody().getId()).isEqualTo("1");
 	}
-	
+
 	@Test
-    public void postMethodExampleShouldReturnString() {
-		
+	public void postMethodExampleShouldReturnString() {
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
@@ -63,21 +62,21 @@ public class ExampleClientTest {
 		map.add("date", "2017-01-02T21:32:00");
 
 		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-		
-		ResponseEntity<String> response = restTemplate.postForEntity(url+"addUser", request, String.class);
-		
+
+		ResponseEntity<String> response = restTemplate.postForEntity(url + "addUser", request, String.class);
+
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
 		assertThat(response.getBody()).isEqualTo("User added successfully");
 	}
-	
+
 	@Test
-    public void getWithPathVariableExampleShouldReturnUserDeletedWithDate() {
-		
-		
+	public void getWithPathVariableExampleShouldReturnUserDeletedWithDate() {
+
 		ResponseEntity<User> response = restTemplate.exchange(url + "getUserWithGivenId/{id}", HttpMethod.GET, null,
 				User.class, "2");
-		
+
+		restTemplate.d
 		
 		assertThat(response).isNotNull();
 		assertThat(response.getStatusCodeValue()).isEqualTo(200);
