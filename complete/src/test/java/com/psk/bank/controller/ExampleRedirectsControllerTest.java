@@ -47,7 +47,6 @@ public class ExampleRedirectsControllerTest {
     @Test
     public void shouldRespondWithErrorWheNotPlainText() throws Exception {
         mockMvc.perform(post("/consume-produce-example").contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .accept(MediaType.TEXT_PLAIN).content("input")).andExpect(status().is4xxClientError())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_PLAIN));
+                .accept(MediaType.TEXT_PLAIN).content("input")).andExpect(status().is4xxClientError());
     }
 }
