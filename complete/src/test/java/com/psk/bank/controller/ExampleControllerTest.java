@@ -55,5 +55,4 @@ public class ExampleControllerTest {
                 .param("name", "NewUser").param("date", "2017-01-02T21:32:00"))
                 .andExpect(content().string(containsString("User added successfully")));
     }
-
 }
