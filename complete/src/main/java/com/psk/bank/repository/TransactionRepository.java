@@ -45,6 +45,11 @@ public class TransactionRepository implements BankRepository<Transaction, Long> 
     public Long nextId() {
         return idSeq++;
     }
+
+	@Override
+	public Transaction deleteOne(Long id) {
+		return null;
+	}
     
 
 }

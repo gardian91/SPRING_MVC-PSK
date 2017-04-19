@@ -2,14 +2,12 @@ package com.psk.bank;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-
-import java.time.LocalDateTime;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,10 +26,6 @@ public class ApplicationTest {
 	@Autowired
 	private MockMvc mockMvc;
 
-	@Test
-	public void handleGetRequestTest() throws Exception {
-		mockMvc.perform(get("/model")).andExpect(content().string(containsString("get request : variant 1")));
-	}
 
 	@Test
 	public void getDetailsTest() throws Exception {

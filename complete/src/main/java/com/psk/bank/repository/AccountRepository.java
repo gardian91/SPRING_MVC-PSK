@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.annotation.ManagedBean;
-
 import org.springframework.stereotype.Repository;
 
 import com.psk.bank.model.Account;
@@ -38,6 +36,11 @@ public class AccountRepository  implements BankRepository<Account, String>{
 	@Override
 	public List<Account> findAll() {
 		return storage.values().stream().collect(Collectors.toList());
+	}
+
+	@Override
+	public Account deleteOne(String id) {
+		return null;
 	}
 
 

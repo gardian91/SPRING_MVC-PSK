@@ -1,10 +1,8 @@
 package com.psk.bank.model;
 
-import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.time.LocalDateTime;
+
+import org.springframework.stereotype.Component;
 
 @Component
 public class User {
