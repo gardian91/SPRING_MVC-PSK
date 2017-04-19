@@ -26,7 +26,6 @@ public class ApplicationTest {
 	@Autowired
 	private MockMvc mockMvc;
 
-
 	@Test
 	public void getDetailsTest() throws Exception {
 		mockMvc.perform(get("/pathVariableExample/1234/Adrian"))
@@ -37,7 +36,7 @@ public class ApplicationTest {
 	public void getDetailsResponseTest() throws Exception {
 		this.mockMvc
 				.perform(get("/pathVariableExample/1234/Adrian")
-						.accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
+				.accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
 				.andExpect(status().is(200)).andExpect(content().contentType("text/html;charset=UTF-8"));
 
 	}
@@ -52,8 +51,11 @@ public class ApplicationTest {
 	@Test
 	public void postMethodExampleShouldReturnString() throws Exception {
 
-		mockMvc.perform(post("/addUser").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id", "1")
-				.param("name", "NewUser").param("date", "2017-01-02T21:32:00"))
+		mockMvc.perform(post("/addUser")
+				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("id", "1")
+				.param("name", "NewUser")
+				.param("date", "2017-01-02T21:32:00"))
 				.andExpect(content().string(containsString("User added successfully")));
 	}
 

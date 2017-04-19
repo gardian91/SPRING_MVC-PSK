@@ -45,6 +45,8 @@ public class ExampleController {
 		return VIEW_PAGE;
 	}
 
+	//////////////////Request mapping
+	
 	@GetMapping("/get")
 	public String handleGetRequest(Model model) {
 
@@ -53,8 +55,7 @@ public class ExampleController {
 		return VIEW_PAGE;
 	}
 
-	/////// @Controler,ModelAndView,Model,@GetMapping
-
+	
 	@RequestMapping(value = "/variant2", method = RequestMethod.GET)
 	public String handleGetRequestVariant2(Model model) {
 
@@ -62,6 +63,8 @@ public class ExampleController {
 
 		return VIEW_PAGE;
 	}
+
+	
 
 	@PostMapping
 	public String handlePostRequest(Model model, @RequestParam(value = "id", required = false) String id,
@@ -80,16 +83,24 @@ public class ExampleController {
 		return VIEW_PAGE;
 	}
 
-	////////// @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping)
+	////////// @PathVariable, @RequestParam
 
 	@RequestMapping(value = "pathVariableExample/{id}/{name}", method = RequestMethod.GET)
-	public String getDetails(@PathVariable("id") long id, @PathVariable("name") String name, Model model) {
+	public String pathVariableExample(@PathVariable("id") long id, @PathVariable("name") String name, Model model) {
 
 		model.addAttribute("message", id + " " + name);
 
 		return VIEW_PAGE;
-
 	}
+	
+	@RequestMapping(value = "pathVariableExample2/{id}&{name}", method = RequestMethod.GET)
+	public String pathVariableExample2(@PathVariable("id") long id, @PathVariable("name") String name, Model model) {
+
+		model.addAttribute("message", id + " " + name);
+
+		return VIEW_PAGE;
+	}
+	
 
 	@RequestMapping(value = "/requestParamExample", method = RequestMethod.GET)
 	public String getDetailsRequestParam(Model model, @RequestParam(value = "id", required = false) String id,
@@ -101,7 +112,7 @@ public class ExampleController {
 
 	}
 
-	// http://localhost:8080/requestParamExample?id=testId&name=testName
+	/////@ResponseBody
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public @ResponseBody String addUser(@RequestParam(value = "id", required = false) String id,
