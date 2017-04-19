@@ -37,7 +37,8 @@ public class ApplicationTest {
 		this.mockMvc
 				.perform(get("/pathVariableExample/1234/Adrian")
 				.accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
-				.andExpect(status().is(200)).andExpect(content().contentType("text/html;charset=UTF-8"));
+				.andExpect(status().is(200))
+				.andExpect(content().contentType("text/html;charset=UTF-8"));
 
 	}
 
@@ -45,7 +46,8 @@ public class ApplicationTest {
 	public void deleteWithPathVariableExampleShouldReturnDeletedUser() throws Exception {
 		mockMvc.perform(delete("/deleteUserWithGivenId/1"))
 		        .andExpect(status().isOk())
-				.andExpect(jsonPath("$.id", is("1"))).andExpect(jsonPath("$.name", is("User1")))
+				.andExpect(jsonPath("$.id", is("1")))
+				.andExpect(jsonPath("$.name", is("User1")))
 				.andExpect(jsonPath("$.date", is("2017-01-02T21:32:00")));
 	}
 
