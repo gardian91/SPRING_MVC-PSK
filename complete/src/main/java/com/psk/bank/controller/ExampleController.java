@@ -26,24 +26,33 @@ public class ExampleController {
 	@Autowired
 	private UserRepository userRepository;
 
-	private String viewPage = "infoPage";
+	private String VIEW_PAGE = "infoPage";
 
-	@GetMapping(value = "/modelAndView")
+	@RequestMapping(value = "/modelAndView", method = RequestMethod.GET)
 	public ModelAndView modelAndView() {
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewPage);
-		mav.addObject("message", "get request");
+		mav.setViewName(VIEW_PAGE);
+		mav.addObject("message", "modelAndView");
 
 		return mav;
 	}
 
-	@GetMapping(value = "/model")
+	@RequestMapping(value = "/model", method = RequestMethod.GET)
+	public String model(Model model) {
+
+		model.addAttribute("message", "model");
+
+		return VIEW_PAGE;
+	}
+	
+	
+	@GetMapping("/get")
 	public String handleGetRequest(Model model) {
 
 		model.addAttribute("message", "get request : variant 1");
 
-		return viewPage;
+		return VIEW_PAGE;
 	}
 
 	/////// @Controler,ModelAndView,Model,@GetMapping
@@ -53,7 +62,7 @@ public class ExampleController {
 
 		model.addAttribute("message", "get request : variant 2");
 
-		return viewPage;
+		return VIEW_PAGE;
 	}
 
 	@PostMapping
@@ -62,7 +71,7 @@ public class ExampleController {
 
 		model.addAttribute("message", id + " " + name);
 
-		return viewPage;
+		return VIEW_PAGE;
 	}
 
 	@RequestMapping(value = "/variant2", method = RequestMethod.POST)
@@ -70,34 +79,10 @@ public class ExampleController {
 
 		model.addAttribute("message", "post request : variant 2");
 
-		return viewPage;
+		return VIEW_PAGE;
 	}
 
-	@PutMapping
-	public ModelAndView handlePutRequest() {
 
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewPage);
-		mav.addObject("message", "put request");
-
-		return mav;
-	}
-
-	@DeleteMapping
-	public ModelAndView handleDeleteRequest() {
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewPage);
-		mav.addObject("message", "delete request");
-
-		return mav;
-	}
-
-	@PatchMapping("test")
-	public String handlePatchRequest() {
-
-		return "PatchMapping-view";
-	}
 
 	////////// @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping)
 
@@ -106,7 +91,7 @@ public class ExampleController {
 
 		model.addAttribute("message", id + " " + name);
 
-		return viewPage;
+		return VIEW_PAGE;
 
 	}
 
@@ -117,7 +102,7 @@ public class ExampleController {
 
 		model.addAttribute("message", id + " " + name);
 
-		return viewPage;
+		return VIEW_PAGE;
 
 	}
 
