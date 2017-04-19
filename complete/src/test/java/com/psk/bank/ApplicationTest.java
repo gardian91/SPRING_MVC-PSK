@@ -43,7 +43,8 @@ public class ApplicationTest {
 
 	@Test
 	public void deleteWithPathVariableExampleShouldReturnDeletedUser() throws Exception {
-		mockMvc.perform(delete("/deleteUserWithGivenId/1")).andExpect(status().isOk())
+		mockMvc.perform(delete("/deleteUserWithGivenId/1"))
+		        .andExpect(status().isOk())
 				.andExpect(jsonPath("$.id", is("1"))).andExpect(jsonPath("$.name", is("User1")))
 				.andExpect(jsonPath("$.date", is("2017-01-02T21:32:00")));
 	}
