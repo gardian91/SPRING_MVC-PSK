@@ -63,7 +63,7 @@ public class ExampleController {
 		return VIEW_PAGE;
 	}
 
-	@PostMapping
+	@PostMapping("/post")
 	public String handlePostRequest(Model model, @RequestParam(value = "id", required = false) String id,
 			@RequestParam(value = "name", required = false) String name) {
 
