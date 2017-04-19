@@ -49,4 +49,35 @@ public class ExampleRedirectsControllerTest {
         mockMvc.perform(post("/consume-produce-example").contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .accept(MediaType.TEXT_PLAIN).content("input")).andExpect(status().is4xxClientError());
     }
+
+    @Test
+    public void shouldAcceptPlainTextEntityVersion() throws Exception {
+        mockMvc.perform(post("/consume-produce-entity-example").contentType(MediaType.TEXT_PLAIN).content("input")
+                .accept(MediaType.TEXT_PLAIN)).andExpect(status().is2xxSuccessful())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_PLAIN));
+    }
+
+    @Test
+    public void shouldRespondWithErrorWheNotPlainTextEntityVersion() throws Exception {
+        mockMvc.perform(post("/consume-produce-entity-example").contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .accept(MediaType.TEXT_PLAIN).content("input")).andExpect(status().is4xxClientError());
+    }    
+    
+    @Test
+    public void shouldRespondWithTeapotStatus() throws Exception {
+        mockMvc.perform(post("/response-status-example").contentType(MediaType.TEXT_PLAIN).content("input")).andExpect(status().isIAmATeapot())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_PLAIN));
+    }
+    
+    @Test
+    public void shouldRespondWithTeapotStatusEntityVersion() throws Exception {
+        mockMvc.perform(post("/response-status-entity-example").contentType(MediaType.TEXT_PLAIN).content("input")).andExpect(status().isIAmATeapot())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_PLAIN));
+    }
+    
+    @Test
+    public void shouldRespondWithTeapotStatusWhenExceptionOccures() throws Exception {
+        mockMvc.perform(post("/response-status-with-exception").contentType(MediaType.TEXT_PLAIN).content("input")).andExpect(status().isIAmATeapot())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_PLAIN));
+    }
 }
