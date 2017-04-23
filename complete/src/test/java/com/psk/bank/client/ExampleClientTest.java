@@ -82,4 +82,21 @@ public class ExampleClientTest {
         assertThat(response.getBody().getId()).isEqualTo("1");
     }
 
+    @Test
+    public void postMethodExampleShouldReturnStringUsingRealObject() {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        User newUser = new User("2", "newUser2", LocalDateTime.now());
+        HttpEntity<User> request = new HttpEntity<User>(newUser, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(url + "addUserWithRequestBody", request,
+                String.class);
+
+        assertThat(response).isNotNull();
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+        assertThat(response.getBody()).isEqualTo("User added successfully");
+    }
+
 }

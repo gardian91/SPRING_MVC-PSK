@@ -9,6 +9,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDateTime;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,17 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.psk.bank.model.User;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ExampleControllerTest {
 
+    @Autowired
+    private ObjectMapper objectMapper;
+    
     @Autowired
     private MockMvc mockMvc;
 
@@ -53,6 +61,17 @@ public class ExampleControllerTest {
 
         mockMvc.perform(post("/addUser").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id", "1")
                 .param("name", "NewUser").param("date", "2017-01-02T21:32:00"))
+                .andExpect(content().string(containsString("User added successfully")));
+    }
+    
+    @Test
+    public void postMethodExampleShouldReturnStringUsingRealObject() throws Exception {
+        
+        User user = new User("T","TU",LocalDateTime.parse("2017-03-03T23:33:00"));
+
+        String content = objectMapper.writeValueAsString(user);
+        
+        mockMvc.perform(post("/addUserWithRequestBody").contentType(MediaType.APPLICATION_JSON).content(content))
                 .andExpect(content().string(containsString("User added successfully")));
     }
 }
